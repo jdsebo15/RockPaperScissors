@@ -1,0 +1,11 @@
+.scoreContainer{
+    display: flex;
+    flex-direction: column;
+}
+.scoreBoard{
+    display: flex;
+    flex-direction: row;
+}
+.score{
+    margin: 10px;
+}
