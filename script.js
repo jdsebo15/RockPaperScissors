@@ -61,64 +61,15 @@ function rps(cpu,player){
         }
         }   
     }
-let i = 0;
 let playerScore = 0;
 let cpuScore = 0;
 function playRound(e){
     let playerGuess = e.target.className;
     //for (let i = 0; i < 5; i++){
-        
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //maybe everything inside of the green marks needs to be outside of the function that 
-        //way it doesn't get called everytime. Also, how do you append once and then not append again but instead update. 
-        //perhaps you could set some variable to 0 and only append if that variable is 0
-        //then you could increment that variable so that it doesnt get printed on the screen again everytime you click a selection. 
-        //this will depend on on the variables changing and causing the text to chage. 
-
-//adding classes
-    if (i == 0){
-        const container = document.querySelector('#container');
-        // creating required elements
-        const scoreContainer = document.createElement('div');
-        const scoreboard = document.createElement('div');
-        const p1 = document.createElement('div');
-        const p2 = document.createElement('div');
-        const p1score = document.createElement('div');
-        const p2score = document.createElement('div');
-        const left = document.createElement('div');
-        const right = document.createElement('div');
-        const winner = document.createElement('div');
-        //playRound();
-        scoreContainer.classList.add('scoreContainer');
-        p1.classList.add('p1');
-        p2.classList.add('p2');
-        left.classList.add('score');
-        right.classList.add('score');
-        p1score.classList.add('score');
-        p2score.classList.add('score');
-        scoreboard.classList.add('scoreBoard');
-        winner.classList.add('winner');
-        //adding text
-        scoreContainer.textContent = 'Scoreboard';
-        p1.textContent = 'User';
-        p2.textContent = 'CPU';
-        p1score.textContent = `${playerScore}`;
-        p2score.textContent = `${cpuScore}`;
-////////////////////////////////////////////////////////////////////////////////////
-
-
-
-        //appending creations
-        container.appendChild(scoreContainer);
-        scoreContainer.appendChild(scoreboard);
-        scoreboard.appendChild(left);
-        scoreboard.appendChild(right);
-        right.appendChild(p1);
-        left.appendChild(p2);
-        right.appendChild(p1score);
-        left.appendChild(p2score);
-        
-    }
+    const p1score = document.querySelector('.left');   
+    const p2score = document.querySelector('.right');
+    const result = document.querySelector('.result');
+    
         //let playerGuess = prompt('Rock, Paper, or Scissors?', "Enter Response:");
         playerGuess = playerGuess.toLowerCase();
         if (playerGuess == 'rock' || playerGuess == 'scissors' || playerGuess == 'paper'){
@@ -126,17 +77,29 @@ function playRound(e){
             let winner = rps(cpuGuess, playerGuess);
             if (winner == 'win'){
                 playerScore += 1;
-                p1score.textContent=`${playerScore}`;
+                p1score.textContent=`Player Score: ${playerScore}`;
+                result.textContent = 'You Win!';
             }  else if (winner == 'cpu'){
                 cpuScore +=1;
-                p2score.textContent=`${cpuScore}`;
+                p2score.textContent=`Computer Score: ${cpuScore}`;
+                result.textContent = 'You Lose!';
+            }  else if (winner == 'tie'){
+                result.textContent = 'It was a tie! Pick again.'
             }
         }
         if (playerScore == 5){
-            winner.textContent = 'You Win!';
+            result.textContent = `You won the game ${playerScore} games to ${cpuScore} games`;
+            playerScore = 0;
+            cpuScore = 0;
+            p1score.textContent=`Player Score: ${playerScore}`;
+            p2score.textContent=`Computer Score: ${cpuScore}`;
+
         } else if (cpuScore == 5){
-            winner.textContent = 'You Lose!';
+            result.textContent = `You lost the game ${playerScore} games to ${cpuScore} games`;
+            playerScore = 0;
+            cpuScore = 0;
+            p1score.textContent=`Player Score: ${playerScore}`;
+            p2score.textContent=`Computer Score: ${cpuScore}`;
         }
-        i++;
-}
+    }
 
